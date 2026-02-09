@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <title>JEU DE ROUE SPORT SANTÉ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --herault-magenta: #8D1F5B; 
+            --text-dark: #2d3436;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--herault-magenta);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            background: white;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+        .logo-img { height: 65px; width: auto; }
+        .header-center { text-align: center; }
+        .header-center h1 { margin: 0; font-size: 1.2rem; color: var(--herault-magenta); font-weight: 900; text-transform: uppercase; }
+        .header-center p { margin: 0; font-size: 0.9rem; font-weight: 300; color: var(--text-dark); }
+
+        main {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            gap: 20px;
+            box-sizing: border-box;
+            height: calc(100vh - 90px);
+        }
+
+        /* BARRE LATÉRALE */
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 15px;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        #list-items {
+            display: flex;
+            flex-direction: column;
+            height: 85%;
+            justify-content: space-between;
+        }
+
+        /* EFFET SUR LES CATÉGORIES */
+        .cat-item {
+            background: white;
+            border-radius: 15px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            transform: translateX(0);
+        }
+        
+        .cat-item:active {
+            transform: scale(0.97) translateX(10px);
+            background: #f8f8f8;
+        }
+
+        .circle {
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; margin-right: 15px; flex-shrink: 0; color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .cat-item h3 { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
+
+        /* ZONE DE DROITE */
+        .content-area {
+            flex: 2;
+            background: white;
+            border-radius: 35px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .q-box { 
+            background: #f8f9fa; border-radius: 25px; padding: 20px;
+            font-size: 1.7rem; font-weight: 800; text-align: center;
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px; color: var(--herault-magenta);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .a-box {
+            display: none; background: #fdf2f5; padding: 20px;
+            border-radius: 20px; border-left: 8px solid var(--herault-magenta);
+            font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-reveal { 
+            background: #2ecc71; color: white; border: none; padding: 20px; 
+            border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        .btn-reveal:active { transform: scale(0.95); background: #27ae60; }
+
+        .btn-reset { 
+            background: rgba(255,255,255,0.2); color: white; border: 1px solid white; 
+            padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 700; width: 100%;
+            transition: 0.3s;
+        }
+        .btn-reset:active { background: white; color: var(--herault-magenta); }
+
+        /* COULEURS */
+        .color-vert { background-color: #27ae60; }
+        .color-rose { background-color: #e91e63; }
+        .color-bleu { background-color: #2980b9; }
+        .color-jaune { background-color: #f1c40f; }
+        .color-rouge { background-color: #c0392b; }
+        .color-orange { background-color: #e67e22; }
+        .color-magenta { background-color: #8D1F5B; }
+
+        #step-public { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 20px; width: 300px; }
+        .btn-public { 
+            background: white; color: var(--herault-magenta); border: none; padding: 30px; 
+            border-radius: 20px; font-weight: 900; font-size: 1.5rem; cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-public:active { transform: scale(0.9); }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="logo-herault.png" alt="Département" class="logo-img">
+    <div class="header-center">
+        <h1>Jeu de Roue Sport Santé Bien Être</h1>
+        <p>Espace éducateur</p>
+    </div>
+    <img src="logo-departement.png" alt="Hérault Sport" class="logo-img">
+</header>
+
+<main>
+    <div id="step-public">
+        <button class="btn-public" onclick="startApp('adulte')">ADO / ADULTE</button>
+        <button class="btn-public" onclick="startApp('enfant')">ENFANT</button>
+    </div>
+
+    <div id="game-interface" style="display:none; width: 100%; gap: 20px;">
+        <div class="sidebar">
+            <div id="list-items"></div>
+            <button class="btn-reset" onclick="location.reload()">← CHANGER PUBLIC</button>
+        </div>
+
+        <div class="content-area">
+            <div id="q-label" style="color: var(--herault-magenta); font-weight: 900; margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 2px;">SÉLECTIONNEZ UN THÈME</div>
+            <div id="q-text" class="q-box">Prêt pour le quiz ?</div>
+            <div id="a-text" class="a-box"></div>
+            <button id="btn-reveal" class="btn-reveal" style="display: none;" onclick="showAnswer()">VOIR LA RÉPONSE</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    const data = {
+        'adulte': [
+            {e: '🌍', n: 'Environnement', c: 'color-vert', q: "Quelle est la durée de décomposition d'un mégot ?", r: "Il faut environ 12 ans."},
+            {e: '❤️', n: 'Sexualité', c: 'color-rose', q: "Le consentement est-il révocable ?", r: "Oui, à tout moment."},
+            {e: '🏃‍♂️', n: 'Act. Physiques', c: 'color-bleu', q: "Objectif idéal de pas par jour ?", r: "10 000 pas."},
+            {e: '🍏', n: 'Alimentation', c: 'color-jaune', q: "Faut-il supprimer les graisses ?", r: "Non, il faut privilégier les bonnes graisses (poisson, huile d'olive)."},
+            {e: '⚠️', n: 'Facteurs Risques', c: 'color-rouge', q: "Principal risque du tabagisme ?", r: "Maladies respiratoires et cancers."},
+            {e: '🚫', n: 'Addictions', c: 'color-orange', q: "Une addiction peut-elle être sans produit ?", r: "Oui, les écrans ou les jeux d'argent sont des addictions comportementales."}
+        ],
+        'enfant': [
+            {e: '🌍', n: 'Environnement', c: 'color-vert', q: "Pourquoi faut-il trier ?", r: "Pour protéger la nature et recycler."},
+            {e: '🧍', n: 'Mon Corps', c: 'color-rose', q: "Combien as-tu de dents de lait ?", r: "On en a 20 au total."},
+            {e: '⚽', n: 'Sport', c: 'color-magenta', q: "Pourquoi courir ?", r: "Pour muscler ton cœur et tes jambes."},
+            {e: '🍎', n: 'Alimentation', c: 'color-jaune', q: "Le sucre est-il ton meilleur ami ?", r: "Non, un peu c'est bien, trop c'est dangereux pour les dents."},
+            {e: '🫁', n: 'Respiration', c: 'color-rouge', q: "Où va l'air quand tu inspires ?", r: "Il va remplir tes poumons."},
+            {e: '📱', n: 'Écrans', c: 'color-orange', q: "Peut-on jouer aux écrans avant de dormir ?", r: "Non, ça empêche de faire de beaux rêves."}
+        ]
+    };
+
+    function startApp(publicType) {
+        document.getElementById('step-public').style.display = 'none';
+        const ui = document.getElementById('game-interface');
+        ui.style.display = 'flex';
+        
+        const list = document.getElementById('list-items');
+        list.innerHTML = '';
+        data[publicType].forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'cat-item';
+            div.onclick = () => loadQuestion(item);
+            div.innerHTML = `<div class="circle ${item.c}">${item.e}</div><h3>${item.n}</h3>`;
+            list.appendChild(div);
+        });
+    }
+
+    function loadQuestion(item) {
+        document.getElementById('q-label').innerText = item.n.toUpperCase();
+        const qBox = document.getElementById('q-text');
+        qBox.innerText = item.q;
+        
+        // Relancer l'animation
+        qBox.style.animation = 'none';
+        qBox.offsetHeight; 
+        qBox.style.animation = null;
+
+        document.getElementById('a-text').innerText = item.r;
+        document.getElementById('a-text').style.display = 'none';
+        document.getElementById('btn-reveal').style.display = 'block';
+    }
+
+    function showAnswer() {
+        const aBox = document.getElementById('a-text');
+        aBox.style.display = 'block';
+        document.getElementById('btn-reveal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
