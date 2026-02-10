@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <title>JEU DE ROUE SPORT SANTÉ</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -27,13 +28,14 @@
 
         header {
             background: white;
-            padding: 0 40px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 90px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             z-index: 10;
+            flex-shrink: 0;
         }
         .logo-img { height: 65px; width: auto; }
         .header-center { text-align: center; }
@@ -47,6 +49,7 @@
             gap: 20px;
             box-sizing: border-box;
             height: calc(100vh - 90px);
+            overflow: hidden;
         }
 
         /* BARRE LATÉRALE */
@@ -60,13 +63,13 @@
             padding: 15px;
             height: 100%;
             box-sizing: border-box;
+            overflow-y: auto;
         }
 
         #list-items {
             display: flex;
             flex-direction: column;
-            height: 85%;
-            justify-content: space-between;
+            gap: 10px;
         }
 
         /* EFFET SUR LES CATÉGORIES */
@@ -83,7 +86,7 @@
         }
         
         .cat-item:active {
-            transform: scale(0.97) translateX(10px);
+            transform: scale(0.97);
             background: #f8f8f8;
         }
 
@@ -96,7 +99,7 @@
 
         .cat-item h3 { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); }
 
-        /* ZONE DE DROITE */
+        /* ZONE DE DROITE (CONTENU) */
         .content-area {
             flex: 2;
             background: white;
@@ -105,11 +108,71 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        /* --- MEDIA QUERIES (POUR TÉLÉPHONE) --- */
+        @media (max-width: 900px) {
+            body { overflow: auto; height: auto; min-height: 100vh; }
+            
+            header { 
+                height: auto; 
+                padding: 10px; 
+                flex-direction: column; 
+                gap: 10px; 
+            }
+            .header-center h1 { font-size: 1rem; }
+            .logo-img { height: 40px; } /* Logos plus petits */
+
+            main {
+                flex-direction: column; /* Ordre vertical */
+                height: auto;
+                padding: 10px;
+            }
+
+            .sidebar {
+                flex: none;
+                width: 100%;
+                background: transparent;
+                padding: 0;
+            }
+
+            /* Transformation de la liste en grille sur mobile */
+            #list-items {
+                display: grid;
+                grid-template-columns: 1fr 1fr; /* 2 colonnes */
+                gap: 10px;
+            }
+
+            .cat-item {
+                padding: 8px;
+                flex-direction: column; /* Icône au dessus du texte */
+                text-align: center;
+                justify-content: center;
+            }
+
+            .circle { margin-right: 0; margin-bottom: 5px; }
+            
+            .cat-item h3 { font-size: 0.8rem; }
+
+            .content-area {
+                flex: none;
+                width: 100%;
+                padding: 20px;
+                min-height: 300px;
+                box-sizing: border-box;
+            }
+
+            .btn-reset {
+                margin-top: 15px;
+                background: white;
+                color: var(--herault-magenta);
+            }
         }
 
         .q-box { 
             background: #f8f9fa; border-radius: 25px; padding: 20px;
-            font-size: 1.7rem; font-weight: 800; text-align: center;
+            font-size: 1.4rem; font-weight: 800; text-align: center;
             flex: 1; display: flex; align-items: center; justify-content: center;
             margin-bottom: 20px; color: var(--herault-magenta);
             animation: fadeIn 0.5s ease-out;
@@ -118,7 +181,7 @@
         .a-box {
             display: none; background: #fdf2f5; padding: 20px;
             border-radius: 20px; border-left: 8px solid var(--herault-magenta);
-            font-size: 1.3rem; font-weight: 700; margin-bottom: 20px;
+            font-size: 1.2rem; font-weight: 700; margin-bottom: 20px;
             animation: slideIn 0.4s ease-out;
         }
 
@@ -129,6 +192,7 @@
             background: #2ecc71; color: white; border: none; padding: 20px; 
             border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 1.2rem;
             transition: var(--transition);
+            width: 100%;
         }
         .btn-reveal:active { transform: scale(0.95); background: #27ae60; }
 
@@ -136,6 +200,7 @@
             background: rgba(255,255,255,0.2); color: white; border: 1px solid white; 
             padding: 10px; border-radius: 10px; cursor: pointer; font-weight: 700; width: 100%;
             transition: 0.3s;
+            margin-top: auto; 
         }
         .btn-reset:active { background: white; color: var(--herault-magenta); }
 
@@ -148,11 +213,12 @@
         .color-orange { background-color: #e67e22; }
         .color-magenta { background-color: #8D1F5B; }
 
-        #step-public { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 20px; width: 300px; }
+        #step-public { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 20px; width: 300px; z-index: 100;}
         .btn-public { 
             background: white; color: var(--herault-magenta); border: none; padding: 30px; 
             border-radius: 20px; font-weight: 900; font-size: 1.5rem; cursor: pointer;
             transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         .btn-public:active { transform: scale(0.9); }
     </style>
@@ -174,15 +240,15 @@
         <button class="btn-public" onclick="startApp('enfant')">ENFANT</button>
     </div>
 
-    <div id="game-interface" style="display:none; width: 100%; gap: 20px;">
+    <div id="game-interface" style="display:none; width: 100%; gap: 20px; flex: 1;">
         <div class="sidebar">
             <div id="list-items"></div>
-            <button class="btn-reset" onclick="location.reload()">← CHANGER PUBLIC</button>
+            <button class="btn-reset" onclick="resetApp()">← CHANGER PUBLIC</button>
         </div>
 
         <div class="content-area">
             <div id="q-label" style="color: var(--herault-magenta); font-weight: 900; margin-bottom: 10px; font-size: 0.8rem; letter-spacing: 2px;">SÉLECTIONNEZ UN THÈME</div>
-            <div id="q-text" class="q-box">Prêt pour le quiz ?</div>
+            <div id="q-text" class="q-box">Sélectionnez une catégorie ci-contre (ou au-dessus) pour commencer.</div>
             <div id="a-text" class="a-box"></div>
             <button id="btn-reveal" class="btn-reveal" style="display: none;" onclick="showAnswer()">VOIR LA RÉPONSE</button>
         </div>
@@ -212,7 +278,7 @@
     function startApp(publicType) {
         document.getElementById('step-public').style.display = 'none';
         const ui = document.getElementById('game-interface');
-        ui.style.display = 'flex';
+        ui.style.display = 'flex'; // Active l'interface
         
         const list = document.getElementById('list-items');
         list.innerHTML = '';
@@ -225,12 +291,22 @@
         });
     }
 
+    // NOUVELLE FONCTION POUR LE RETOUR ARRIÈRE SANS INTERNET
+    function resetApp() {
+        document.getElementById('game-interface').style.display = 'none'; // Cache le jeu
+        document.getElementById('step-public').style.display = 'flex'; // Affiche le menu
+        
+        // On remet la zone de question à zéro pour faire propre
+        document.getElementById('q-text').innerText = "Sélectionnez une catégorie ci-contre (ou au-dessus) pour commencer.";
+        document.getElementById('a-text').style.display = 'none';
+        document.getElementById('btn-reveal').style.display = 'none';
+    }
+
     function loadQuestion(item) {
         document.getElementById('q-label').innerText = item.n.toUpperCase();
         const qBox = document.getElementById('q-text');
         qBox.innerText = item.q;
         
-        // Relancer l'animation
         qBox.style.animation = 'none';
         qBox.offsetHeight; 
         qBox.style.animation = null;
@@ -249,5 +325,3 @@
 
 </body>
 </html>
-
-
