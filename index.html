@@ -194,8 +194,14 @@
 function resetApp() {
     // On cache l'interface de jeu
     document.getElementById('game-interface').style.display = 'none';
+    
     // On ré-affiche le menu de sélection Adulte/Enfant
     document.getElementById('step-public').style.display = 'flex';
+    
+    // Optionnel : on remet à zéro le texte de la question pour la prochaine fois
+    document.getElementById('q-text').innerText = "Prêt pour le quiz ?";
+    document.getElementById('a-text').style.display = 'none';
+    document.getElementById('btn-reveal').style.display = 'none';
 }
     const data = {
         'adulte': [
@@ -256,3 +262,4 @@ function resetApp() {
 
 </body>
 </html>
+
