@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
     <title>JEU DE ROUE SPORT SANTÉ</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --herault-magenta: #8D1F5B; --text-dark: #2d3436; --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        :root { --herault-magenta: #8D1F5B; --text-dark: #2d3436; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--herault-magenta); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
         header { background: white; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; height: 90px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 10; flex-shrink: 0; }
         .logo-img { height: 60px; width: auto; }
@@ -16,23 +15,20 @@
         main { display: flex; flex: 1; padding: 20px; gap: 20px; box-sizing: border-box; height: calc(100vh - 90px); overflow: hidden; }
         .sidebar { flex: 1; display: flex; flex-direction: column; justify-content: space-between; background: rgba(255, 255, 255, 0.1); border-radius: 25px; padding: 15px; box-sizing: border-box; }
         #list-items { display: flex; flex-direction: column; gap: 10px; overflow-y: auto; }
-        .cat-item { background: white; border-radius: 15px; padding: 10px 15px; display: flex; align-items: center; cursor: pointer; transition: var(--transition); }
-        .cat-item:active { transform: scale(0.95); }
+        .cat-item { background: white; border-radius: 15px; padding: 10px 15px; display: flex; align-items: center; cursor: pointer; }
         .circle { width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-right: 12px; flex-shrink: 0; color: white; }
         .cat-item h3 { margin: 0; font-size: 0.85rem; font-weight: 700; color: var(--text-dark); }
-        .content-area { flex: 2; background: white; border-radius: 35px; padding: 30px; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .q-box { background: #f8f9fa; border-radius: 25px; padding: 20px; font-size: 1.2rem; font-weight: 800; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--herault-magenta); overflow-y: auto; }
-        .a-box { display: none; background: #fdf2f5; padding: 20px; border-radius: 20px; border-left: 8px solid var(--herault-magenta); font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; text-align: center; }
-        .btn-reveal { background: #2ecc71; color: white; border: none; padding: 20px; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 1.2rem; }
+        .content-area { flex: 2; background: white; border-radius: 35px; padding: 30px; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; }
+        .q-box { background: #f8f9fa; border-radius: 25px; padding: 20px; font-size: 1.2rem; font-weight: 800; text-align: center; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 20px; color: var(--text-dark); white-space: pre-line; }
+        .a-box { display: none; background: #fdf2f5; padding: 20px; border-radius: 20px; border-left: 8px solid var(--herault-magenta); font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; text-align: center; color: var(--herault-magenta); }
+        .btn-reveal { background: #2ecc71; color: white; border: none; padding: 20px; border-radius: 15px; font-weight: 900; cursor: pointer; font-size: 1.2rem; width: 100%; }
         .btn-reset { background: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: 700; width: 100%; margin-top: 10px; }
-        
         .color-vert { background-color: #27ae60; } 
         .color-bleu { background-color: #2980b9; } 
         .color-jaune { background-color: #f1c40f; }
         .color-orange { background-color: #e67e22; }
         .color-rouge { background-color: #c0392b; }
         .color-violet { background-color: #9b59b6; }
-
         #step-public { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: 20px; width: 280px; }
         .btn-public { background: white; color: var(--herault-magenta); border: none; padding: 30px; border-radius: 20px; font-weight: 900; font-size: 1.4rem; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     </style>
@@ -58,7 +54,7 @@
         </div>
         <div class="content-area">
             <div id="q-label" style="color: var(--herault-magenta); font-weight: 900; margin-bottom: 10px; font-size: 0.8rem;">SÉLECTIONNEZ UN THÈME</div>
-            <div id="q-text" class="q-box">Prêt pour le quiz ?</div>
+            <div id="q-text" class="q-box">Sélectionnez une catégorie à gauche pour commencer le quiz.</div>
             <div id="a-text" class="a-box"></div>
             <button id="btn-reveal" class="btn-reveal" style="display: none;" onclick="handleButtonClick()">VOIR LA RÉPONSE</button>
         </div>
@@ -83,36 +79,97 @@
                     {q: "L'air, l'eau et la terre sont :\nA. Inutiles\nB. Seulement pour les animaux\nC. Essentiels pour la vie\nD. Remplaçables", r: "Réponse C : Essentiels pour la vie"},
                     {q: "Trier les déchets permet de :\nA. Les faire disparaître\nB. Les recycler et moins polluer\nC. Les mélanger\nD. Les brûler", r: "Réponse B : Les recycler et moins polluer"},
                     {q: "Jeter un déchet dans la nature peut :\nA. Ne rien faire\nB. Aider les plantes\nC. Polluer l'environnement\nD. Le faire disparaître", r: "Réponse C : Polluer l'environnement"},
-                    {q: "Pour économiser l'eau, on peut :\nA. Laisser couler le robinet\nB. Prendre des douches très longues\nC. Fermer le robinet quand on se lave les mains\nD. Arroser souvent", r: "Réponse C : Fermer le robinet"}
+                    {q: "Pour économiser l'eau, on peut :\nA. Laisser couler le robinet\nB. Prendre des douches très longues\nC. Fermer le robinet quand on se lave les mains\nD. Arroser souvent", r: "Réponse C : Fermer le robinet"},
+                    {q: "L'électricité est souvent produite grâce à :\nA. Des ressources infinies\nB. Des ressources qui peuvent s'épuiser\nC. De la magie\nD. Des piles seulement", r: "Réponse B : Des ressources qui s'épuisent"},
+                    {q: "Éteindre la lumière quand on sort d'une pièce permet de :\nA. Rendre la pièce triste\nB. Économiser de l'énergie\nC. Faire noir\nD. Abîmer l'ampoule", r: "Réponse B : Économiser de l'énergie"},
+                    {q: "Le plastique est un déchet qui :\nA. Se dégrade très vite\nB. Peut polluer les océans longtemps\nC. Est bon pour les poissons\nD. Disparaît dans l'eau", r: "Réponse B : Peut polluer les océans"},
+                    {q: "Manger des fruits et légumes de saison est meilleur car :\nA. Ils sont plus colorés\nB. Ils ne poussent pas en serre chauffée\nC. Ils sont plus petits\nD. Ils viennent de loin", r: "Réponse B : Pas de serre chauffée"},
+                    {q: "Utiliser moins de papier permet de protéger :\nA. Les océans\nB. Les forêts\nC. Le ciel\nD. Les routes", r: "Réponse B : Les forêts"},
+                    {q: "Le vélo et la marche sont bons pour l'environnement car :\nA. Ils font du bruit\nB. Ils ne polluent pas l'air\nC. Ils vont très vite\nD. Ils utilisent de l'essence", r: "Réponse B : Ne polluent pas l'air"},
+                    {q: "Les abeilles sont importantes car :\nA. Elles piquent\nB. Elles aident les plantes à se reproduire\nC. Elles font du bruit\nD. Elles dorment tout le temps", r: "Réponse B : Reproduction des plantes"},
+                    {q: "La pollution de l'air peut :\nA. Aider à mieux respirer\nB. Rendre les gens malades\nC. Nettoyer les nuages\nD. Faire grandir les arbres", r: "Réponse B : Rendre les gens malades"},
+                    {q: "Réutiliser un objet au lieu de le jeter s'appelle :\nA. Le gaspillage\nB. Le recyclage\nC. La réutilisation\nD. La pollution", r: "Réponse C : La réutilisation"},
+                    {q: "La nature nous donne :\nA. Des jouets en plastique\nB. Tout ce dont on a besoin pour vivre\nC. Seulement des fleurs\nD. Rien du tout", r: "Réponse B : Tout pour vivre"}
                 ]
             },
             {
                 e: '👤', n: 'Mon corps', c: 'color-rouge',
                 questions: [
-                    {q: "Pourquoi est-il important de prendre soin de son cœur dès l'enfance ?\nA. Il ne sert qu'aux adultes\nB. Il travaille toute la vie\nC. Il grandit chaque jour\nD. Il peut s'arrêter la nuit", r: "Réponse B : Il travaille toute la vie"},
-                    {q: "Bouger tous les jours permet surtout de :\nA. Fatiguer le cœur\nB. Aider le cœur à rester en bonne santé\nC. Abîmer les muscles\nD. Donner plus faim", r: "Réponse B : Aider le cœur à rester en bonne santé"},
-                    {q: "Le cœur bat plus vite quand :\nA. On dort\nB. On fait un effort physique\nC. On regarde la télé\nD. On lit un livre", r: "Réponse B : On fait un effort physique"}
+                    {q: "Pourquoi prendre soin de son cœur dès l'enfance ?\nA. Il ne sert qu'aux adultes\nB. Il travaille toute la vie\nC. Il grandit chaque jour\nD. Il peut s'arrêter la nuit", r: "Réponse B : Il travaille toute la vie"},
+                    {q: "Bouger tous les jours permet surtout de :\nA. Fatiguer le cœur\nB. Aider le cœur à rester en bonne santé\nC. Abîmer les muscles\nD. Donner plus faim", r: "Réponse B : Cœur en bonne santé"},
+                    {q: "Quel est le rôle principal du cœur ?\nA. Faire circuler le sang\nB. Digérer la nourriture\nC. Penser\nD. Respirer", r: "Réponse A : Faire circuler le sang"},
+                    {q: "Le cœur bat plus vite quand :\nA. On dort\nB. On fait un effort physique\nC. On regarde la télé\nD. On lit un livre", r: "Réponse B : Effort physique"},
+                    {q: "Le corps a besoin de sommeil pour :\nA. Grandir et récupérer de l'énergie\nB. Perdre son temps\nC. Devenir plus petit\nD. Avoir plus faim", r: "Réponse A : Grandir et récupérer"},
+                    {q: "Se laver les mains régulièrement permet de :\nA. Gaspiller du savon\nB. Éviter les microbes et maladies\nC. Se salir davantage\nD. Rendre les mains lourdes", r: "Réponse B : Éviter les microbes"},
+                    {q: "Les os servent à :\nA. Soutenir le corps et le protéger\nB. Faire circuler le sang\nC. Digérer\nD. Faire joli", r: "Réponse A : Soutenir le corps"},
+                    {q: "L'hygiène corporelle, c'est :\nA. Faire du sport\nB. Prendre soin de la propreté du corps\nC. Manger des bonbons\nD. Dormir beaucoup", r: "Réponse B : Propreté du corps"},
+                    {q: "Brosser ses dents permet d'éviter :\nA. Les caries\nB. La fatigue\nC. Le hoquet\nD. Les courbatures", r: "Réponse A : Les caries"},
+                    {q: "Le squelette humain est composé de :\nA. Muscles\nB. Os\nC. Graisse\nD. Eau", r: "Réponse B : Les os"},
+                    {q: "Pour bien grandir, il faut :\nA. Dormir peu\nB. Manger équilibré et bouger\nC. Regarder les écrans\nD. Manger du sel", r: "Réponse B : Équilibré + Bouger"},
+                    {q: "Le cerveau sert à :\nA. Commander tout le corps\nB. Porter des charges\nC. Digérer\nD. Faire circuler le sang", r: "Réponse A : Commander le corps"},
+                    {q: "Boire de l'eau est important pour :\nA. Hydrater le corps\nB. Faire grossir\nC. Empêcher de dormir\nD. Ne rien faire", r: "Réponse A : Hydrater le corps"},
+                    {q: "La peau sert à :\nA. Respirer\nB. Protéger le corps contre l'extérieur\nC. Porter les os\nD. Digérer", r: "Réponse B : Protéger le corps"},
+                    {q: "Le cœur est :\nA. Un os\nB. Un muscle\nC. Une poche d'air\nD. Une glande", r: "Réponse B : Un muscle"}
                 ]
             },
             {
                 e: '⚽', n: 'Sport', c: 'color-bleu',
                 questions: [
-                    {q: "Le sport aide le cœur car :\nA. Il le fait travailler et rester fort\nB. Il le fatigue pour toujours\nC. Il le ralentit\nD. Il ne change rien", r: "Réponse A : Il le fait travailler et rester fort"},
-                    {q: "Il est important de s'échauffer avant le sport pour :\nA. Faire joli\nB. Prévenir les blessures\nC. Se fatiguer plus vite\nD. Ne rien changer", r: "Réponse B : Prévenir les blessures"}
+                    {q: "Le sport aide le cœur car :\nA. Il le fait travailler et rester fort\nB. Il le fatigue pour toujours\nC. Il le ralentit\nD. Il ne change rien", r: "Réponse A : Le fait travailler"},
+                    {q: "Il est important de s'échauffer avant le sport pour :\nA. Faire joli\nB. Prévenir les blessures\nC. Se fatiguer plus vite\nD. Ne rien changer", r: "Réponse B : Prévenir les blessures"},
+                    {q: "Le sport permet de :\nA. Devenir plus faible\nB. Se sentir mieux et être en forme\nC. S'ennuyer\nD. Moins bien dormir", r: "Réponse B : Se sentir en forme"},
+                    {q: "Après le sport, il est important de :\nA. Boire de l'eau pour s'hydrater\nB. Ne pas boire\nC. Manger du sucre\nD. Courir encore", r: "Réponse A : S'hydrater"},
+                    {q: "L'activité physique, c'est :\nA. Seulement le sport en club\nB. Bouger son corps (marcher, jouer)\nC. Rester assis\nD. Lire", r: "Réponse B : Bouger son corps"},
+                    {q: "Les muscles servent à :\nA. Réfléchir\nB. Permettre le mouvement du corps\nC. Digérer\nD. Porter les chaussures", r: "Réponse B : Mouvement"},
+                    {q: "Le sport renforce :\nA. Les os et les muscles\nB. Les cheveux\nC. Les vêtements\nD. Rien du tout", r: "Réponse A : Os et muscles"},
+                    {q: "Jouer dehors est une activité :\nA. Sportive/physique\nB. Passive\nC. Inutile\nD. Fatigante seulement", r: "Réponse A : Sportive/physique"},
+                    {q: "Le manque d'activité physique peut :\nA. Améliorer la santé\nB. Rendre le corps plus fragile\nC. Faire grandir\nD. Donner de la force", r: "Réponse B : Corps fragile"},
+                    {q: "L'esprit sportif, c'est :\nA. Gagner à tout prix\nB. Le respect des autres et des règles\nC. Se moquer\nD. Tricher", r: "Réponse B : Respect des autres"},
+                    {q: "On doit bouger :\nA. Une fois par mois\nB. Tous les jours\nC. Seulement le week-end\nD. Jamais", r: "Réponse B : Tous les jours"},
+                    {q: "Le sport peut aider à :\nA. Se faire des amis\nB. Être triste\nC. Se blesser\nD. Ne plus penser", r: "Réponse A : Se faire des amis"},
+                    {q: "Pendant l'effort, on transpire pour :\nA. Se salir\nB. Refroidir le corps\nC. Devenir mouillé\nD. Maigrir", r: "Réponse B : Refroidir le corps"},
+                    {q: "L'endurance, c'est :\nA. Courir vite 10 secondes\nB. Être capable de faire un effort longtemps\nC. S'arrêter de suite\nD. Dormir", r: "Réponse B : Effort long"},
+                    {q: "Le sport à l'école sert à :\nA. Ne pas travailler\nB. Apprendre à bouger et être en santé\nC. Crier\nD. Courir pour rien", r: "Réponse B : Apprendre à bouger"}
                 ]
             },
             {
                 e: '🍎', n: 'Alimentation', c: 'color-jaune',
                 questions: [
                     {q: "Manger équilibré signifie :\nA. Manger toujours la même chose\nB. Manger un peu de tout\nC. Manger seulement des légumes\nD. Manger beaucoup", r: "Réponse B : Manger un peu de tout"},
-                    {q: "L'eau est la seule boisson :\nA. Sucrée\nB. Indispensable au corps\nC. Interdite\nD. Inutile", r: "Réponse B : Indispensable au corps"}
+                    {q: "Les féculents (pâtes, riz, pain) donnent surtout :\nA. De l'énergie\nB. Des vitamines seulement\nC. Du sel\nD. De l'eau", r: "Réponse A : De l'énergie"},
+                    {q: "Manger des fruits et légumes car :\nA. Ils sont colorés\nB. Ils apportent vitamines et fibres\nC. Ils remplacent l'eau\nD. Ils sont sucrés", r: "Réponse B : Vitamines et fibres"},
+                    {q: "Le petit-déjeuner est important car :\nA. Il donne de l'énergie pour la matinée\nB. Il permet de dormir plus\nC. Il n'est pas important\nD. Il remplace le dîner", r: "Réponse A : Énergie matinée"},
+                    {q: "Trop de sucre peut :\nA. Être bon pour les dents\nB. Favoriser caries et fatigue\nC. Donner de la force infinie\nD. Faire grandir", r: "Réponse B : Caries et fatigue"},
+                    {q: "Les produits laitiers servent à :\nA. Donner de la force aux os\nB. Faire courir plus vite\nC. Remplacer les fruits\nD. Rien du tout", r: "Réponse A : Force aux os"},
+                    {q: "Il faut boire de l'eau :\nA. Seulement quand on a soif\nB. Régulièrement toute la journée\nC. Jamais\nD. Seulement en mangeant", r: "Réponse B : Régulièrement"},
+                    {q: "Viande, poisson et œufs apportent :\nA. Du sucre\nB. Des protéines pour les muscles\nC. De l'eau\nD. Du gras", r: "Réponse B : Protéines"},
+                    {q: "Le grignotage entre les repas est :\nA. Conseillé\nB. À éviter pour la santé\nC. Indispensable\nD. Très bien", r: "Réponse B : À éviter"},
+                    {q: "Manger trop salé peut être :\nA. Bon pour le cœur\nB. Mauvais pour la santé\nC. Utile\nD. Indifférent", r: "Réponse B : Mauvais pour la santé"},
+                    {q: "Les vitamines servent à :\nA. Protéger et faire fonctionner le corps\nB. Donner du goût\nC. Faire grossir\nD. Dormir", r: "Réponse A : Faire fonctionner le corps"},
+                    {q: "Mieux vaut un fruit entier qu'un jus car :\nA. C'est plus dur à mâcher\nB. Plus de fibres et moins de sucre\nC. C'est plus gros\nD. Pas de changement", r: "Réponse B : Fibres et moins de sucre"},
+                    {q: "Le repas du soir doit être idéalement :\nA. Très lourd\nB. Équilibré et pas trop lourd\nC. Des bonbons\nD. Absent", r: "Réponse B : Équilibré et léger"},
+                    {q: "Pour bien digérer, il faut :\nA. Manger très vite\nB. Prendre le temps de bien mâcher\nC. Courir en mangeant\nD. Ne pas mâcher", r: "Réponse B : Bien mâcher"},
+                    {q: "L'eau est la seule boisson :\nA. Sucrée\nB. Indispensable au corps\nC. Interdite\nD. Inutile", r: "Réponse B : Indispensable"}
                 ]
             },
             {
                 e: '🌬️', n: 'Respiration', c: 'color-violet',
                 questions: [
-                    {q: "La respiration sert surtout à :\nA. Faire bouger les muscles\nB. Apporter de l'oxygène au corps\nC. Digérer les aliments\nD. Donner de la chaleur", r: "Réponse B : Apporter de l'oxygène au corps"},
-                    {q: "Le sang transporte dans le corps :\nA. Seulement de l'eau\nB. De l'oxygène et des nutriments\nC. Des os\nD. Des microbes", r: "Réponse B : De l'oxygène et des nutriments"}
+                    {q: "La respiration sert surtout à :\nA. Faire bouger les muscles\nB. Apporter de l'oxygène au corps\nC. Digérer les aliments\nD. Donner de la chaleur", r: "Réponse B : Apporter de l'oxygène"},
+                    {q: "Les poumons servent à :\nA. Digérer\nB. Respirer\nC. Penser\nD. Marcher", r: "Réponse B : Respirer"},
+                    {q: "Quand on inspire, l'air :\nA. Sort des poumons\nB. Entre dans les poumons\nC. Disparaît\nD. Va dans le ventre", r: "Réponse B : Entre dans les poumons"},
+                    {q: "L'oxygène est transporté dans le corps par :\nA. Les os\nB. Le sang\nC. Les cheveux\nD. La nourriture", r: "Réponse B : Le sang"},
+                    {q: "Le sport est bon pour les poumons car :\nA. Il les fait s'arrêter\nB. Il les entraîne à mieux fonctionner\nC. Il les abîme\nD. Il les réduit", r: "Réponse B : Mieux fonctionner"},
+                    {q: "La pollution de l'air est :\nA. Bonne pour les poumons\nB. Mauvaise pour la respiration\nC. Sans importance\nD. Utile", r: "Réponse B : Mauvaise respiration"},
+                    {q: "Le cœur est un organe qui sert à :\nA. Respirer\nB. Faire circuler le sang\nC. Digérer\nD. Penser", r: "Réponse B : Faire circuler le sang"},
+                    {q: "Le sang transporte dans le corps :\nA. Seulement de l'eau\nB. De l'oxygène et des nutriments\nC. Des os\nD. Des microbes", r: "Réponse B : Oxygène et nutriments"},
+                    {q: "Les vaisseaux sanguins sont :\nA. Des muscles\nB. Des os\nC. Des tuyaux qui transportent le sang\nD. Des nerfs", r: "Réponse C : Tuyaux pour le sang"},
+                    {q: "Quand on fait du sport, la respiration et le cœur :\nA. Ralentissent\nB. S'arrêtent\nC. Travaillent plus\nD. Disparaissent", r: "Réponse C : Travaillent plus"},
+                    {q: "Respirer calmement permet de :\nA. Se stresser\nB. Se fatiguer\nC. Se calmer\nD. Avoir faim", r: "Réponse C : Se calmer"},
+                    {q: "Une bonne circulation du sang aide à :\nA. Fatiguer les muscles\nB. Apporter ce dont le corps a besoin\nC. Donner froid\nD. Bloquer l'oxygène", r: "Réponse B : Apporter les besoins"},
+                    {q: "Le sport est bon pour le cœur car il :\nA. Le fatigue pour toujours\nB. L'empêche de fonctionner\nC. L'entraîne à mieux travailler\nD. L'abîme", r: "Réponse C : L'entraîne"},
+                    {q: "Respirer de l'air pur est :\nA. Inutile\nB. Important pour la santé\nC. Dangereux\nD. Rare", r: "Réponse B : Important santé"},
+                    {q: "L'expiration, c'est quand :\nA. On bloque sa respiration\nB. On rejette l'air des poumons\nC. On mange\nD. On dort", r: "Réponse B : Rejette l'air"}
                 ]
             },
             {
@@ -146,11 +203,13 @@
     }
 
     function showQuestion() {
+        if(!currentCat) return;
         const item = currentCat.questions[currentIdx];
         document.getElementById('q-label').innerText = currentCat.n.toUpperCase() + " (" + (currentIdx + 1) + "/" + currentCat.questions.length + ")";
         document.getElementById('q-text').innerText = item.q;
         document.getElementById('a-text').innerText = item.r;
         document.getElementById('a-text').style.display = 'none';
+        
         const btn = document.getElementById('btn-reveal');
         btn.style.display = 'block';
         btn.innerText = "VOIR LA RÉPONSE";
@@ -165,7 +224,7 @@
             ans.style.display = 'block';
             if (currentIdx < currentCat.questions.length - 1) {
                 btn.innerText = "QUESTION SUIVANTE";
-                btn.style.background = var(--herault-magenta);
+                btn.style.background = "#8D1F5B";
             } else {
                 btn.innerText = "FIN DU THÈME";
                 btn.style.background = "#34495e";
@@ -183,11 +242,13 @@
     function resetApp() {
         document.getElementById('game-interface').style.display = 'none';
         document.getElementById('step-public').style.display = 'flex';
-        document.getElementById('q-text').innerText = "Prêt pour le quiz ?";
+        document.getElementById('q-text').innerText = "Sélectionnez une catégorie à gauche pour commencer le quiz.";
         document.getElementById('a-text').style.display = 'none';
         document.getElementById('btn-reveal').style.display = 'none';
         document.getElementById('q-label').innerText = "SÉLECTIONNEZ UN THÈME";
+        currentCat = null;
     }
 </script>
 </body>
 </html>
+
