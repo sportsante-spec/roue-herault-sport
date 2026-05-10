@@ -302,16 +302,29 @@
         }
 
         .a-card {
-            background: #fdf2f7;
-            border-left: 6px solid var(--magenta);
-            border-radius: var(--radius);
-            padding: 18px 24px;
-            font-size: 1.05rem;
-            font-weight: 800;
-            color: var(--magenta);
-            text-align: center;
-            display: none;
-            animation: slideIn 0.25s ease;
+    background: #fdf2f7;
+    border-left: 6px solid var(--magenta);
+    border-radius: var(--radius);
+    padding: 18px 24px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    animation: slideIn 0.25s ease;
+}
+.a-answer {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--magenta);
+}
+.a-explain {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #666;
+    font-style: italic;
+    border-top: 1px solid #e8c5d8;
+    padding-top: 8px;
+    line-height: 1.5;
+}
         }
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -404,120 +417,121 @@
 const data = {
     adulte: [
         {
-            e: '🌍', n: 'Environnement', c: 'c-vert',
-            questions: [
-                {q: "Que signifie le recyclage ?\nA. Détruire les déchets par incinération\nB. Transformer des déchets en nouvelles matières ou objets\nC. Stocker les déchets dans des décharges", r: "Réponse B : Transformer des déchets en nouvelles matières ou objets"},
-                {q: "Pourquoi éteindre les lumières en quittant une pièce ?\nA. Pour éviter l'usure des ampoules\nB. Pour réduire la consommation d'énergie et l'empreinte carbone\nC. Pour profiter de la lumière naturelle", r: "Réponse B : Pour réduire la consommation d'énergie et l'empreinte carbone"},
-                {q: "Quel gaz est principalement responsable de l'effet de serre d'origine humaine ?\nA. L'azote\nB. Le dioxyde de carbone (CO₂)\nC. L'argon", r: "Réponse B : Le dioxyde de carbone (CO₂)"},
-                {q: "Quelle action réduit efficacement la consommation d'eau domestique ?\nA. Laisser couler l'eau pendant le brossage des dents\nB. Fermer le robinet quand on ne l'utilise pas\nC. Préférer les bains aux douches", r: "Réponse B : Fermer le robinet quand on ne l'utilise pas"},
-                {q: "Que désigne le terme 'biodiversité' ?\nA. La présence d'espèces rares uniquement\nB. La diversité des espèces vivantes, de leurs gènes et de leurs écosystèmes\nC. La variété des paysages naturels", r: "Réponse B : La diversité des espèces vivantes, de leurs gènes et de leurs écosystèmes"},
-                {q: "Quel rôle écologique jouent les arbres ?\nA. Ils stabilisent les sols et produisent de l'oxygène grâce à la photosynthèse\nB. Ils empêchent la formation des nuages\nC. Ils absorbent uniquement l'oxygène de l'air", r: "Réponse A : Ils stabilisent les sols et produisent de l'oxygène"},
-                {q: "Pourquoi ne pas abandonner de déchets dans la nature ?\nA. Parce que cela peut contaminer les écosystèmes et nuire à la faune\nB. Parce que cela empêche les plantes de pousser\nC. Parce que cela attire les touristes", r: "Réponse A : Cela contamine les écosystèmes et nuit à la faune"},
-                {q: "Quelle forme d'énergie est produite directement par le rayonnement du soleil ?\nA. L'énergie solaire photovoltaïque\nB. L'énergie géothermique\nC. L'énergie thermique fossile", r: "Réponse A : L'énergie solaire photovoltaïque"},
-                {q: "Dans le tri sélectif français, que dépose-t-on dans la poubelle jaune ?\nA. Les déchets organiques\nB. Les emballages recyclables (plastique, métal, carton)\nC. Les ordures ménagères classiques", r: "Réponse B : Les emballages recyclables (plastique, métal, carton)"},
-                {q: "Quel moyen de transport est le plus écologique pour un trajet en ville ?\nA. La voiture individuelle\nB. Le vélo ou la marche\nC. Le taxi", r: "Réponse B : Le vélo ou la marche"}
-            ]
+           {
+    e: '🌍', n: 'Environnement', c: 'c-vert',
+    questions: [
+        {q: "Que signifie le recyclage ?\nA. Incinérer les déchets pour réduire leur volume\nB. Transformer des déchets en nouvelles matières ou objets\nC. Exporter les déchets vers d'autres pays", r: {r: "Réponse B : Transformer des déchets en nouvelles matières", e: "Le recyclage permet de réintroduire les matières dans le cycle de production, réduisant l'extraction de ressources naturelles vierges."}},
+        {q: "Pourquoi éteindre les lumières en quittant une pièce ?\nA. Pour prolonger la durée de vie des ampoules LED\nB. Pour réduire la consommation d'énergie et l'empreinte carbone\nC. Pour stabiliser la tension du réseau électrique", r: {r: "Réponse B : Réduire la consommation d'énergie", e: "L'éclairage représente 10 à 15% de la consommation électrique d'un foyer. Éteindre réduit directement les émissions de CO₂."}},
+        {q: "Quel gaz est principalement responsable de l'effet de serre d'origine humaine ?\nA. Le méthane (CH₄)\nB. Le dioxyde de carbone (CO₂)\nC. L'oxyde d'azote (N₂O)", r: {r: "Réponse B : Le dioxyde de carbone (CO₂)", e: "Le CO₂ représente environ 75% des émissions mondiales de gaz à effet de serre liées aux activités humaines."}},
+        {q: "Quelle action réduit le plus la consommation d'eau à la maison ?\nA. Installer un économiseur de débit sur le robinet\nB. Prendre une douche courte plutôt qu'un bain\nC. Utiliser uniquement de l'eau froide", r: {r: "Réponse B : Prendre une douche courte plutôt qu'un bain", e: "Un bain consomme en moyenne 150 litres, contre 30 à 80 litres pour une douche de 5 minutes."}},
+        {q: "Que désigne le terme 'biodiversité' ?\nA. La variété des paysages et des écosystèmes\nB. La diversité des espèces vivantes, de leurs gènes et de leurs écosystèmes\nC. Le nombre total d'espèces animales recensées", r: {r: "Réponse B : Diversité des espèces, gènes et écosystèmes", e: "La biodiversité englobe toutes les espèces vivantes, leur diversité génétique et les milieux de vie."}},
+        {q: "Quel rôle jouent principalement les arbres ?\nA. Ils absorbent uniquement le CO₂ sans produire d'oxygène\nB. Ils stabilisent les sols et produisent de l'oxygène grâce à la photosynthèse\nC. Ils régulent principalement la température des océans", r: {r: "Réponse B : Stabilisent les sols et produisent de l'oxygène", e: "Un arbre mature peut absorber jusqu'à 22 kg de CO₂ par an. Les forêts jouent aussi un rôle clé contre l'érosion."}},
+        {q: "Pourquoi ne pas abandonner de déchets dans la nature ?\nA. Parce que cela contamine les écosystèmes sur des centaines d'années\nB. Parce que cela attire uniquement des animaux en zone urbaine\nC. Parce que c'est interdit seulement dans les parcs naturels", r: {r: "Réponse A : Cela contamine les écosystèmes sur des centaines d'années", e: "Une bouteille plastique met 450 ans à se dégrader. Elle libère des substances toxiques dans les sols et les nappes phréatiques."}},
+        {q: "Quelle forme d'énergie est produite directement par le rayonnement solaire ?\nA. L'énergie géothermique\nB. L'énergie éolienne\nC. L'énergie solaire photovoltaïque", r: {r: "Réponse C : L'énergie solaire photovoltaïque", e: "Les panneaux photovoltaïques convertissent directement la lumière en électricité, sans combustion ni émission de CO₂."}},
+        {q: "Dans le tri sélectif, que dépose-t-on dans la poubelle jaune ?\nA. Les déchets organiques et restes alimentaires\nB. Les emballages recyclables (plastique, métal, carton)\nC. Les ordures ménagères et emballages souillés", r: {r: "Réponse B : Les emballages recyclables", e: "La poubelle jaune est pour les emballages propres et secs. Les déchets organiques vont en poubelle verte ou au compost."}},
+        {q: "Quel moyen de transport est le plus écologique en ville ?\nA. Le bus ou le tramway\nB. La voiture électrique individuelle\nC. Le vélo ou la marche à pied", r: {r: "Réponse C : Le vélo ou la marche à pied", e: "Le vélo et la marche ont une empreinte carbone quasi nulle. Même le bus émet moins par personne qu'une voiture individuelle."}}
+    ]
+
+            
         },
         {
-            e: '❤️', n: 'Sexualité', c: 'c-rouge',
-            questions: [
-                {q: "Quels sont les effets de la pilule contraceptive ?\nA. Elle fait forcément grossir\nB. Elle augmente les performances sportives\nC. Elle évite une grossesse non désirée\nD. Elle diminue les performances sportives", r: "Réponse C : Elle évite une grossesse non désirée"},
-                {q: "Le préservatif peut :\nA. Uniquement éviter une grossesse\nB. Uniquement protéger du SIDA\nC. Éviter une grossesse et protéger contre le SIDA et les IST", r: "Réponse C : Éviter une grossesse et protéger contre le SIDA et les IST"},
-                {q: "Quels sont les modes de contamination du virus du SIDA ?\nA. Par la salive ou la poignée de mains\nB. Par relation sexuelle et par le sang\nC. Par la sueur ou la transpiration\nD. Par l'air ou l'eau", r: "Réponse B : Par relation sexuelle et par le sang"},
-                {q: "Être séropositif, c'est :\nA. Avoir une nouvelle IST bénigne\nB. Être malade du SIDA\nC. Être enceinte\nD. Être porteur du virus du SIDA sans être malade du SIDA", r: "Réponse D : Être porteur du virus sans être malade du SIDA"},
-                {q: "La pilule contraceptive protège-t-elle des infections sexuellement transmissibles ?\nA. Oui, complètement\nB. Non, elle évite seulement une grossesse\nC. Oui, mais seulement de certaines IST", r: "Réponse B : Non, elle évite seulement une grossesse"},
-                {q: "Comment reconnaître un préservatif fiable ?\nA. En l'achetant uniquement en pharmacie\nB. En choisissant une marque connue\nC. En vérifiant la mention NF ou CE sur l'emballage", r: "Réponse C : En vérifiant la mention NF ou CE sur l'emballage"},
-                {q: "Avant d'utiliser un préservatif, il faut :\nA. Le tester au préalable\nB. Vérifier la date de péremption\nC. Le conserver au réfrigérateur", r: "Réponse B : Vérifier la date de péremption"},
-                {q: "Pour la contraception, c'est :\nA. Toujours à la fille de s'en occuper\nB. Une décision qui se prend ensemble, et l'accord parental n'est pas nécessaire\nC. Obligatoirement prescrit par un médecin", r: "Réponse B : Une décision commune, sans besoin d'accord parental"},
-                {q: "La pilule du lendemain :\nA. Se trouve librement en grande surface\nB. Est gratuite pour les mineurs et sans danger si bien utilisée\nC. Est interdite aux moins de 18 ans", r: "Réponse B : Gratuite pour les mineurs et sans danger si bien utilisée"},
-                {q: "Quel est le meilleur moyen de savoir si on a une IST ?\nA. Se renseigner sur des forums en ligne\nB. Observer soi-même les symptômes\nC. Se faire dépister dans un centre spécialisé\nD. Acheter un test en pharmacie sans avis médical", r: "Réponse C : Se faire dépister dans un centre spécialisé"},
-                {q: "Quand on est en couple, qui doit être le plus affectueux ?\nA. La fille, car elle est plus sensible\nB. Le garçon, pour montrer sa maturité\nC. Les deux, l'affection est partagée", r: "Réponse C : Les deux, l'affection est partagée"},
-                {q: "Faire attention à l'autre dans une relation, c'est :\nA. Prendre des décisions ensemble et partager de bons moments\nB. Toujours être d'accord avec l'autre\nC. Laisser l'autre décider à sa place", r: "Réponse A : Décider ensemble et partager de bons moments"},
-                {q: "Pour bien prendre la pilule, il faut :\nA. Prendre chaque jour le comprimé du jour et toujours commencer la plaquette le même jour de la semaine\nB. Prendre un comprimé uniquement lors d'un rapport sexuel\nC. S'arrêter une semaine par mois sans prescription", r: "Réponse A : Un comprimé par jour, même jour de départ chaque plaquette"},
-                {q: "Le sentiment amoureux :\nA. S'exprime exactement de la même façon chez tout le monde\nB. Est identique chez les garçons et les filles\nC. Ne se contrôle pas et peut s'exprimer différemment selon les personnes", r: "Réponse C : Il ne se contrôle pas et s'exprime différemment"},
-                {q: "Quelle activité sportive est uniquement réservée aux filles ?\nA. La danse\nB. La natation synchronisée\nC. Le fitness\nD. Aucune, le sport est accessible à tous", r: "Réponse D : Aucune, le sport est accessible à tous"}
-            ]
-        },
+           {
+    e: '❤️', n: 'Sexualité', c: 'c-rouge',
+    questions: [
+        {q: "Quels sont les effets de la pilule contraceptive ?\nA. Elle garantit une prise de poids systématique\nB. Elle évite une grossesse non désirée\nC. Elle protège contre toutes les IST\nD. Elle remplace complètement le préservatif", r: {r: "Réponse B : Elle évite une grossesse non désirée", e: "La pilule est efficace à plus de 99% si bien prise, mais ne protège pas des IST. Les effets sur le poids varient selon les personnes."}},
+        {q: "Le préservatif peut :\nA. Uniquement éviter une grossesse, sans protection contre les IST\nB. Uniquement protéger du SIDA, pas des autres IST\nC. Éviter une grossesse ET protéger contre le SIDA et les IST", r: {r: "Réponse C : Éviter une grossesse et protéger contre les IST", e: "Le préservatif est le seul contraceptif qui protège à la fois des grossesses et de toutes les IST. Son efficacité dépend d'une utilisation correcte."}},
+        {q: "Quels sont les principaux modes de contamination du VIH ?\nA. Par la salive lors d'un baiser ou d'un éternuement\nB. Par relation sexuelle non protégée et par le sang\nC. Par contact cutané ou poignée de mains\nD. Par les moustiques ou insectes piqueurs", r: {r: "Réponse B : Par relation sexuelle non protégée et par le sang", e: "Le VIH se transmet par le sang, les sécrétions sexuelles et le lait maternel. La salive et la sueur ne transmettent pas le virus."}},
+        {q: "Être séropositif, c'est :\nA. Avoir déclaré la maladie SIDA avec des symptômes visibles\nB. Être immunisé contre le VIH suite à une infection guérie\nC. Être porteur du VIH sans être malade du SIDA", r: {r: "Réponse C : Être porteur du VIH sans être malade du SIDA", e: "Une personne séropositive peut vivre longtemps sans symptômes grâce aux traitements antirétroviraux, mais reste potentiellement contagieuse."}},
+        {q: "La pilule contraceptive protège-t-elle des IST ?\nA. Oui, elle renforce les défenses immunitaires\nB. Non, elle évite seulement une grossesse\nC. Oui, mais seulement contre le VIH", r: {r: "Réponse B : Non, elle évite seulement une grossesse", e: "Seul le préservatif protège des IST. La pilule agit sur l'ovulation et ne crée aucune barrière contre les virus ou bactéries."}},
+        {q: "Comment reconnaître un préservatif fiable ?\nA. En vérifiant que l'emballage est de marque connue\nB. En contrôlant qu'il est vendu en pharmacie\nC. En vérifiant la mention CE ou NF sur l'emballage", r: {r: "Réponse C : La mention CE ou NF sur l'emballage", e: "Le marquage CE ou NF garantit que le préservatif a passé des tests de résistance selon les normes européennes. Une marque connue ne suffit pas."}},
+        {q: "Avant d'utiliser un préservatif, il faut :\nA. Le rincer à l'eau pour enlever le lubrifiant\nB. Vérifier la date de péremption et l'intégrité de l'emballage\nC. Le garder dans son portefeuille pour toujours l'avoir\nD. Le conserver dans un endroit chaud pour le ramollir", r: {r: "Réponse B : Vérifier la date de péremption et l'intégrité de l'emballage", e: "Un préservatif périmé ou stocké dans un portefeuille (chaleur, pression) est fragilisé et risque de se déchirer."}},
+        {q: "Pour la contraception, c'est :\nA. Toujours à la fille de s'en occuper seule\nB. Une décision commune au couple, sans besoin de l'accord des parents\nC. Obligatoirement prescrit par un médecin et non remboursé", r: {r: "Réponse B : Une décision commune, sans besoin d'accord parental", e: "En France, les mineurs ont accès à la contraception sans autorisation parentale. Certaines méthodes sont gratuites jusqu'à 25 ans."}},
+        {q: "La pilule du lendemain :\nA. Se trouve librement en grande surface\nB. Est gratuite pour les mineurs et sans danger si bien utilisée\nC. Est interdite aux moins de 18 ans\nD. N'est efficace que dans les 12h après le rapport", r: {r: "Réponse B : Gratuite pour les mineurs, sans danger si bien utilisée", e: "C'est une contraception d'urgence efficace dans les 72h (ou 120h pour Ella One). Plus elle est prise tôt, plus elle est efficace."}},
+        {q: "Quel est le meilleur moyen de savoir si on a une IST ?\nA. Attendre l'apparition de symptômes visibles\nB. Observer soi-même sans consulter\nC. Se faire dépister dans un centre médical spécialisé\nD. Acheter un test en pharmacie sans suivi médical", r: {r: "Réponse C : Se faire dépister dans un centre médical spécialisé", e: "Beaucoup d'IST sont asymptomatiques. Le dépistage dans les CeGIDD (Centres de santé sexuelle) est gratuit et anonyme."}},
+        {q: "Quand on est en couple, qui doit être le plus affectueux ?\nA. Celui qui aime le plus dans le couple\nB. La fille, par nature plus émotive\nC. Les deux, chacun à sa façon", r: {r: "Réponse C : Les deux, chacun à sa façon", e: "L'affection ne doit pas reposer sur des stéréotypes de genre. Elle s'exprime différemment selon les personnes et doit être partagée."}},
+        {q: "Faire attention à l'autre dans une relation, c'est :\nA. Toujours être disponible, même au détriment de soi\nB. Prendre des décisions ensemble et respecter ses limites\nC. Penser que l'on doit toujours être d'accord avec l'autre", r: {r: "Réponse B : Décider ensemble et respecter les limites de l'autre", e: "Une relation saine repose sur le respect mutuel et l'écoute. La surprotection ou le contrôle peuvent devenir des formes de domination toxique."}},
+        {q: "Pour bien prendre la pilule, il faut :\nA. Prendre un comprimé uniquement lors d'un rapport sexuel\nB. S'arrêter une semaine par mois sans prescription\nC. Prendre un comprimé chaque jour à heure fixe, même jour de départ chaque plaquette", r: {r: "Réponse C : Un comprimé par jour à heure fixe", e: "Un oubli de plus de 12h peut réduire l'efficacité contraceptive. En cas de doute, utiliser un préservatif en complément."}},
+        {q: "Le sentiment amoureux :\nA. S'exprime de la même façon chez tout le monde\nB. Est toujours réciproque si sincère\nC. Ne se contrôle pas et s'exprime différemment selon les personnes", r: {r: "Réponse C : Il ne se contrôle pas et varie selon les personnes", e: "Les émotions amoureuses sont liées à des mécanismes neurochimiques (dopamine, ocytocine). Chaque personne les vit et les exprime de façon unique."}},
+        {q: "Quelle activité sportive est uniquement réservée aux filles ?\nA. La danse classique\nB. La gymnastique rythmique\nC. Le fitness et le yoga\nD. Aucune, le sport est accessible à tous", r: {r: "Réponse D : Aucune, le sport est accessible à tous", e: "En France, tous les sports sont officiellement ouverts à tous. Les stéréotypes de genre dans le sport persistent mais évoluent progressivement."}}
+    ]
+},
+        
         {
-            e: '🏃', n: 'Act. Physiques', c: 'c-bleu',
-            questions: [
-                {q: "Combien de jours par semaine pratiquer le renforcement musculaire ?\nA. 1 jour suffit\nB. 2 jours minimum\nC. 5 jours ou plus", r: "Réponse B : 2 jours minimum par semaine"},
-                {q: "Combien de pas par jour sont conseillés pour rester actif ?\nA. 5 000 pas\nB. 10 000 pas\nC. 15 000 pas", r: "Réponse B : 10 000 pas par jour"},
-                {q: "Quelle activité améliore principalement l'endurance cardiovasculaire ?\nA. La course à pied ou le vélo\nB. La lecture concentrée\nC. Les étirements statiques", r: "Réponse A : La course à pied ou le vélo"},
-                {q: "Quel est le but principal de l'échauffement avant le sport ?\nA. Préparer le corps à l'effort et réduire les risques de blessure\nB. Perdre du poids rapidement\nC. Gagner directement en endurance", r: "Réponse A : Préparer le corps et réduire les risques de blessure"},
-                {q: "Pourquoi la récupération après le sport est-elle importante ?\nA. Pour permettre aux muscles de se réparer et progresser\nB. Pour augmenter immédiatement la performance\nC. Pour perdre du poids plus vite", r: "Réponse A : Pour permettre aux muscles de se réparer"},
-                {q: "Quel est un risque principal de la sédentarité prolongée ?\nA. Maladies cardiovasculaires et prise de poids\nB. Meilleure endurance au repos\nC. Gain de souplesse articulaire", r: "Réponse A : Maladies cardiovasculaires et prise de poids"},
-                {q: "Les activités sportives collectives peuvent :\nA. Réduire le stress et renforcer le bien-être\nB. Augmenter uniquement la fatigue mentale\nC. N'avoir aucun effet sur le moral", r: "Réponse A : Réduire le stress et renforcer le bien-être"},
-                {q: "Que signifie un effort d'intensité modérée ?\nA. Respirer plus vite mais pouvoir encore parler\nB. Respirer si difficilement qu'on ne peut plus parler\nC. Aucun changement respiratoire notable", r: "Réponse A : Respirer plus vite mais pouvoir encore parler"},
-                {q: "Quel indicateur reflète le mieux l'intensité de l'effort physique ?\nA. La fréquence cardiaque\nB. La sensation de faim\nC. La température corporelle", r: "Réponse A : La fréquence cardiaque"},
-                {q: "Combien de minutes d'activité modérée sont recommandées par semaine ?\nA. 75 minutes\nB. 150 minutes\nC. 300 minutes", r: "Réponse B : 150 minutes par semaine"},
-                {q: "Quel facteur augmente le plus la transpiration ?\nA. Effort physique intense ou forte chaleur\nB. Consommation de café uniquement\nC. Regarder un film stressant", r: "Réponse A : Effort physique intense ou forte chaleur"},
-                {q: "La sueur est composée principalement de :\nA. Eau et sels minéraux\nB. Glucides et sucres\nC. Protéines et graisses", r: "Réponse A : Eau et sels minéraux"},
-                {q: "Combien de temps faut-il marcher rapidement pour brûler un menu Big Mac (~1040 kcal) ?\nA. 1 heure\nB. 2 heures\nC. 3h30\nD. 5 heures", r: "Réponse C : Environ 3h30 de marche rapide"},
-                {q: "Quelle activité brûle le plus de calories en 30 minutes ?\nA. Marche rapide (~150 kcal)\nB. Yoga (~100 kcal)\nC. Vélo modéré (~200 kcal)", r: "Réponse C : Vélo modéré (~200 kcal)"},
-                {q: "Quel facteur influence le plus la dépense calorique pendant l'activité ?\nA. L'heure de la journée\nB. L'intensité et la durée de l'effort\nC. La fréquence respiratoire au repos\nD. La couleur des vêtements portés", r: "Réponse B : L'intensité et la durée de l'effort"},
-                {q: "Quelle est une bonne façon d'intégrer de l'activité physique au quotidien ?\nA. Aller courir tous les jours sans repos\nB. Prendre les escaliers plutôt que l'ascenseur\nC. Se lever pour marcher 5 minutes toutes les deux heures", r: "Réponses B et C : Escaliers + pauses marchées régulières"}
-            ]
-        },
+           {
+    e: '🏃', n: 'Act. Physiques', c: 'c-bleu',
+    questions: [
+        {q: "Combien de jours par semaine est recommandé le renforcement musculaire ?\nA. 1 jour suffit pour maintenir la masse musculaire\nB. Au moins 2 jours non consécutifs\nC. Tous les jours pour progresser rapidement", r: {r: "Réponse B : Au moins 2 jours non consécutifs", e: "Les muscles ont besoin de 48h pour se réparer. S'entraîner chaque jour le même groupe musculaire ralentit la progression et augmente le risque de blessure."}},
+        {q: "Combien de pas par jour sont conseillés pour rester actif ?\nA. 5 000 pas — suffisant pour un adulte sédentaire\nB. 10 000 pas — objectif recommandé par l'OMS\nC. 20 000 pas — pour compenser une alimentation calorique", r: {r: "Réponse B : 10 000 pas — objectif OMS", e: "Les 10 000 pas quotidiens représentent environ 7 km. Cet objectif réduit significativement les risques cardiovasculaires, diabète et obésité."}},
+        {q: "Quelle activité améliore principalement l'endurance cardiovasculaire ?\nA. Le yoga ou le Pilates\nB. La musculation lourde\nC. La course à pied, le vélo ou la natation", r: {r: "Réponse C : La course, le vélo ou la natation", e: "Les activités d'endurance sollicitent le cœur et les poumons de façon prolongée. Le yoga améliore surtout la souplesse et le bien-être mental."}},
+        {q: "Quel est le but principal de l'échauffement ?\nA. Augmenter la fréquence cardiaque pour brûler plus de calories\nB. Préparer progressivement le corps à l'effort et réduire les blessures\nC. Étirer les muscles avant qu'ils soient chauds pour plus de souplesse", r: {r: "Réponse B : Préparer le corps et réduire les blessures", e: "L'échauffement augmente la température musculaire et améliore la circulation. Les étirements statiques se font APRÈS l'effort, pas avant."}},
+        {q: "Pourquoi la récupération après le sport est-elle importante ?\nA. Elle permet aux muscles de se réparer et de progresser\nB. Elle compense automatiquement les mauvaises habitudes alimentaires\nC. Elle réduit immédiatement les courbatures dès le lendemain", r: {r: "Réponse A : Les muscles se réparent et progressent pendant la récupération", e: "La progression musculaire se fait pendant le repos, pas pendant l'effort. Le manque de récupération entraîne surmenage et blessures."}},
+        {q: "Quel est un risque principal de la sédentarité prolongée ?\nA. Une meilleure récupération du système nerveux\nB. Un ralentissement bénéfique du métabolisme\nC. Maladies cardiovasculaires, diabète et troubles musculaires", r: {r: "Réponse C : Maladies cardiovasculaires, diabète et troubles musculaires", e: "L'OMS classe la sédentarité parmi les 4 principaux facteurs de risque de maladies chroniques, au même titre que le tabac."}},
+        {q: "Que signifie un effort d'intensité modérée ?\nA. Aucun changement respiratoire notable\nB. Respirer plus vite mais pouvoir tenir une conversation\nC. Être essoufflé au point de ne plus pouvoir parler", r: {r: "Réponse B : Respirer plus vite mais pouvoir tenir une conversation", e: "C'est la zone idéale pour l'endurance. Si on ne peut plus parler, l'intensité est élevée. Si on chante sans difficulté, l'effort est trop léger."}},
+        {q: "Quel indicateur reflète le mieux l'intensité de l'effort physique ?\nA. La quantité de transpiration\nB. La sensation de fatigue musculaire\nC. La fréquence cardiaque", r: {r: "Réponse C : La fréquence cardiaque", e: "La fréquence cardiaque est l'indicateur le plus fiable. La transpiration dépend aussi de la chaleur ambiante, pas uniquement de l'effort."}},
+        {q: "Combien de minutes d'activité modérée sont recommandées par semaine ?\nA. 75 minutes — seuil minimal absolu\nB. 150 minutes — recommandation OMS\nC. 300 minutes — objectif des sportifs de haut niveau", r: {r: "Réponse B : 150 minutes par semaine — recommandation OMS", e: "Soit 30 min par jour, 5 jours par semaine. Ces 150 minutes réduisent de 30% le risque de maladies cardiovasculaires."}},
+        {q: "Combien de temps faut-il marcher rapidement pour brûler un menu Big Mac (~1040 kcal) ?\nA. 1h30\nB. 2h30\nC. 3h30", r: {r: "Réponse C : Environ 3h30 de marche rapide", e: "La marche rapide brûle environ 300 kcal/heure. Cela illustre qu'il est bien plus facile de consommer des calories que de les dépenser."}},
+        {q: "Quelle activité brûle le plus de calories en 30 minutes d'effort ?\nA. Marche rapide (~150 kcal)\nB. Natation modérée (~250 kcal)\nC. Vélo modéré (~200 kcal)", r: {r: "Réponse B : Natation modérée (~250 kcal)", e: "La natation sollicite l'ensemble du corps. La résistance de l'eau augmente la dépense énergétique comparée au vélo ou à la marche."}},
+        {q: "Quel facteur influence le plus la dépense calorique pendant l'activité ?\nA. L'heure de la journée (matin vs soir)\nB. L'intensité et la durée de l'effort\nC. La température extérieure", r: {r: "Réponse B : L'intensité et la durée de l'effort", e: "Plus l'effort est intense et long, plus la dépense est élevée. L'heure ou la température n'ont qu'un effet marginal."}},
+        {q: "Quelle est une bonne façon d'intégrer de l'activité physique au quotidien ?\nA. Aller courir 1h tous les jours sans jours de repos\nB. Prendre les escaliers et marcher 5 minutes toutes les 2 heures\nC. Faire une longue séance le week-end pour compenser la semaine", r: {r: "Réponse B : Escaliers + pauses marchées régulières", e: "Le mouvement fractionné toute la journée est plus bénéfique que rester assis 8h puis faire 1h de sport. La régularité est le facteur clé."}}
+    ]
+},
         {
-            e: '🍏', n: 'Alimentation', c: 'c-jaune',
-            questions: [
-                {q: "Combien de portions de fruits et légumes sont recommandées par jour ?\nA. 2 portions\nB. 5 portions\nC. 8 portions", r: "Réponse B : 5 portions par jour"},
-                {q: "Quel aliment est une bonne source de protéines végétales ?\nA. Les lentilles\nB. Le beurre\nC. Les bonbons", r: "Réponse A : Les lentilles"},
-                {q: "Quel aliment apporte beaucoup de potassium ?\nA. La banane\nB. Les chips\nC. Les biscuits sucrés", r: "Réponse A : La banane"},
-                {q: "Une consommation excessive de sel peut favoriser :\nA. L'hypertension artérielle\nB. La myopie\nC. Les allergies cutanées", r: "Réponse A : L'hypertension artérielle"},
-                {q: "Quel type de graisse est considéré comme meilleur pour la santé ?\nA. Les graisses insaturées (huile d'olive, poissons gras)\nB. Les graisses trans industrielles\nC. Les graisses saturées en grande quantité", r: "Réponse A : Les graisses insaturées (huile d'olive, poissons gras)"},
-                {q: "Quel aliment est le plus riche en fibres ?\nA. Les légumes et légumineuses\nB. Les biscuits industriels\nC. Le fromage", r: "Réponse A : Les légumes et légumineuses"},
-                {q: "Pourquoi est-il important de prendre un petit-déjeuner ?\nA. Pour avoir de l'énergie dès le matin et éviter les fringales\nB. Pour remplacer le dîner de la veille\nC. Pour ne pas avoir à boire d'eau le matin", r: "Réponse A : Pour avoir de l'énergie et éviter les fringales"},
-                {q: "Quel nutriment fournit principalement de l'énergie au corps ?\nA. Les glucides\nB. Les vitamines\nC. L'eau", r: "Réponse A : Les glucides"},
-                {q: "Quel aliment contient beaucoup de calcium ?\nA. Le lait et les produits laitiers\nB. Les viandes rouges\nC. Les sodas", r: "Réponse A : Le lait et les produits laitiers"},
-                {q: "Quel aliment est une bonne source d'oméga-3 ?\nA. Le saumon et les poissons gras\nB. Le jambon blanc\nC. Les biscuits secs", r: "Réponse A : Le saumon et les poissons gras"},
-                {q: "Quel aliment est riche en vitamine C ?\nA. L'orange et les agrumes\nB. Le riz blanc\nC. Le fromage à pâte dure", r: "Réponse A : L'orange et les agrumes"},
-                {q: "Pourquoi les fibres alimentaires sont-elles importantes ?\nA. Elles favorisent la digestion et le transit intestinal\nB. Elles remplacent l'eau dans l'organisme\nC. Elles apportent du calcium directement", r: "Réponse A : Elles favorisent la digestion et le transit"}
-            ]
-        },
+            {
+    e: '🍏', n: 'Alimentation', c: 'c-jaune',
+    questions: [
+        {q: "Combien de portions de fruits et légumes sont recommandées par jour ?\nA. 3 portions\nB. 5 portions\nC. 7 portions", r: {r: "Réponse B : 5 portions par jour", e: "Le PNNS recommande 5 fruits et légumes par jour. Une portion = 80g environ. Variez les couleurs pour couvrir tous les nutriments."}},
+        {q: "Quel aliment est une bonne source de protéines végétales ?\nA. Les lentilles et légumineuses\nB. Le pain blanc\nC. Les pommes de terre", r: {r: "Réponse A : Les lentilles et légumineuses", e: "Les légumineuses sont riches en protéines végétales et fibres. Associées à une céréale, elles couvrent tous les acides aminés essentiels."}},
+        {q: "Quel aliment apporte le plus de potassium ?\nA. La banane\nB. Les pâtes cuites\nC. Le yaourt nature", r: {r: "Réponse A : La banane", e: "La banane est riche en potassium, minéral essentiel pour les muscles et le cœur. Les sportifs en consomment souvent après l'effort."}},
+        {q: "Une consommation excessive de sel peut favoriser :\nA. L'hypertension artérielle\nB. Le diabète de type 2\nC. Les troubles de la vision", r: {r: "Réponse A : L'hypertension artérielle", e: "L'excès de sel retient l'eau dans l'organisme et augmente la pression sanguine. L'hypertension est un facteur majeur d'AVC et d'infarctus."}},
+        {q: "Quel type de graisse est le plus bénéfique pour la santé cardiovasculaire ?\nA. Les graisses saturées (beurre, charcuterie)\nB. Les graisses trans (viennoiseries industrielles)\nC. Les graisses insaturées (huile d'olive, poissons gras, noix)", r: {r: "Réponse C : Les graisses insaturées", e: "Les oméga-3 et oméga-9 protègent le cœur. Les graisses saturées et trans augmentent le mauvais cholestérol (LDL)."}},
+        {q: "Quel aliment est le plus riche en fibres alimentaires ?\nA. Le pain blanc\nB. Les légumes secs et légumineuses\nC. Le riz blanc cuit", r: {r: "Réponse B : Les légumes secs et légumineuses", e: "Les fibres ralentissent la digestion, régulent la glycémie et nourrissent le microbiote intestinal. Le riz et pain blancs en contiennent très peu."}},
+        {q: "Pourquoi est-il important de prendre un petit-déjeuner ?\nA. Parce qu'il doit être le repas le plus copieux\nB. Pour avoir de l'énergie le matin et éviter les fringales\nC. Pour remplacer le dîner si on a peu mangé la veille", r: {r: "Réponse B : Énergie le matin et éviter les fringales", e: "Après 8h de jeûne nocturne, le cerveau manque de glucose. Un petit-déjeuner équilibré améliore la concentration et réduit les grignotages."}},
+        {q: "Quel nutriment fournit principalement de l'énergie au corps ?\nA. Les lipides\nB. Les glucides\nC. Les protéines", r: {r: "Réponse B : Les glucides", e: "Les glucides se transforment en glucose, carburant principal du cerveau et des muscles. Les glucides complexes libèrent l'énergie progressivement."}},
+        {q: "Quel aliment est la meilleure source de calcium ?\nA. Les produits laitiers (lait, fromage, yaourt)\nB. Les viandes blanches\nC. Les céréales de petit-déjeuner enrichies", r: {r: "Réponse A : Les produits laitiers", e: "Le calcium des produits laitiers est très bien assimilé. Il est essentiel pour les os et les dents. Les sardines et le tofu en contiennent aussi."}},
+        {q: "Quel aliment est une bonne source d'oméga-3 ?\nA. Le poulet rôti\nB. Le saumon et les poissons gras\nC. Le fromage à pâte dure", r: {r: "Réponse B : Le saumon et les poissons gras", e: "Les oméga-3 (EPA, DHA) des poissons gras réduisent l'inflammation et protègent le cœur. L'ANSES recommande 2 portions par semaine."}},
+        {q: "Quel aliment est riche en vitamine C ?\nA. Les agrumes, le kiwi et le poivron\nB. Le pain complet\nC. Le lait entier", r: {r: "Réponse A : Les agrumes, le kiwi et le poivron", e: "Le poivron rouge contient 3 fois plus de vitamine C qu'une orange. La vitamine C renforce l'immunité et favorise l'absorption du fer."}},
+        {q: "Pourquoi les fibres alimentaires sont-elles importantes ?\nA. Elles favorisent le transit et nourrissent le microbiote intestinal\nB. Elles remplacent les protéines pour les végétariens\nC. Elles apportent de l'énergie rapide comme les sucres", r: {r: "Réponse A : Transit et microbiote intestinal", e: "Les fibres fermentent dans le côlon, nourrissant les bonnes bactéries (microbiote) essentielles pour l'immunité et la santé digestive."}}
+    ]
+},
         {
-            e: '⚠️', n: 'Facteurs Risques', c: 'c-violet',
-            questions: [
-                {q: "Un facteur de risque est :\nA. Une certitude de tomber malade\nB. Un élément qui augmente la probabilité d'un danger\nC. Une mesure de protection", r: "Réponse B : Un élément qui augmente la probabilité d'un danger"},
-                {q: "Le tabagisme est un facteur de risque pour :\nA. Les maladies cardiovasculaires uniquement\nB. Les cancers uniquement\nC. Les deux : maladies cardiovasculaires et cancers", r: "Réponse C : Les maladies cardiovasculaires et les cancers"},
-                {q: "La sédentarité signifie :\nA. Faire trop de sport sans récupération\nB. Ne pas assez bouger au quotidien\nC. Bien se reposer après l'effort", r: "Réponse B : Ne pas assez bouger au quotidien"},
-                {q: "Le stress chronique peut :\nA. Améliorer la santé sur le long terme\nB. Nuire à la santé physique et mentale\nC. N'avoir aucun effet sur l'organisme", r: "Réponse B : Nuire à la santé physique et mentale"},
-                {q: "Une alimentation déséquilibrée augmente le risque de :\nA. Maladies chroniques (diabète, obésité, maladies cardiaques)\nB. Meilleures performances physiques\nC. Renforcement du système immunitaire", r: "Réponse A : Maladies chroniques (diabète, obésité, maladies cardiaques)"},
-                {q: "Le manque de sommeil peut provoquer :\nA. Une meilleure concentration le lendemain\nB. Fatigue et troubles de l'attention\nC. Un regain d'énergie naturel", r: "Réponse B : Fatigue et troubles de l'attention"},
-                {q: "La consommation excessive d'alcool augmente le risque de :\nA. Dépendance et maladies du foie\nB. Meilleure longévité\nC. Renforcement des défenses immunitaires", r: "Réponse A : Dépendance et maladies du foie"},
-                {q: "Le port de la ceinture de sécurité :\nA. Est inutile en ville à basse vitesse\nB. Réduit significativement les risques graves en cas d'accident\nC. Est optionnel pour les passagers arrière", r: "Réponse B : Réduit significativement les risques graves en cas d'accident"},
-                {q: "La pollution de l'air peut affecter :\nA. Seulement les poumons\nB. Seulement le cœur\nC. Les deux : poumons et cœur", r: "Réponse C : Les deux : poumons et cœur"},
-                {q: "L'exposition excessive aux écrans peut affecter :\nA. Le sommeil et la vue\nB. Uniquement la digestion\nC. Principalement les os", r: "Réponse A : Le sommeil et la vue"},
-                {q: "Les comportements à risque incluent :\nA. La prévention et l'information\nB. L'imprudence répétée face aux dangers connus\nC. Le repos et la récupération", r: "Réponse B : L'imprudence répétée face aux dangers connus"},
-                {q: "Le dépistage médical permet de :\nA. Prévenir ou détecter tôt une maladie\nB. Guérir automatiquement sans traitement\nC. Remplacer les soins médicaux", r: "Réponse A : Prévenir ou détecter tôt une maladie"},
-                {q: "L'activité physique régulière :\nA. Augmente les risques de maladies cardiovasculaires\nB. Protège la santé et réduit de nombreux risques\nC. Fatigue l'organisme inutilement", r: "Réponse B : Protège la santé et réduit de nombreux risques"},
-                {q: "Le soutien social (famille, amis) est :\nA. Sans importance pour la santé\nB. Un facteur de protection pour la santé mentale\nC. Un facteur de risque supplémentaire", r: "Réponse B : Un facteur de protection pour la santé mentale"},
-                {q: "Les comportements à risque peuvent être évités par :\nA. L'information et la prévention\nB. Le hasard et la chance\nC. Le silence et l'ignorance", r: "Réponse A : L'information et la prévention"},
-                {q: "Prendre soin de sa santé, c'est :\nA. Réagir seulement quand on est déjà malade\nB. Agir en prévention avant que les problèmes apparaissent\nC. Ne rien changer à ses habitudes", r: "Réponse B : Agir en prévention avant que les problèmes apparaissent"}
-            ]
-        },
+            {
+    e: '⚠️', n: 'Facteurs Risques', c: 'c-violet',
+    questions: [
+        {q: "Un facteur de risque est :\nA. Une certitude de développer une maladie\nB. Un élément qui augmente la probabilité d'un problème de santé\nC. Un signe que la maladie est déjà présente", r: {r: "Réponse B : Augmente la probabilité d'un problème de santé", e: "Un facteur de risque augmente les chances mais ne garantit pas la maladie. Fumer augmente le risque de cancer sans que tous les fumeurs soient atteints."}},
+        {q: "Le tabagisme est un facteur de risque pour :\nA. Les maladies cardiovasculaires uniquement\nB. Les cancers uniquement\nC. Les deux, mais aussi les maladies respiratoires", r: {r: "Réponse C : Maladies cardiovasculaires, cancers et respiratoires", e: "Le tabac est responsable de 75 000 décès par an en France. Il touche les poumons, le cœur, la gorge et de nombreux organes."}},
+        {q: "La sédentarité signifie :\nA. Faire du sport moins de 2 fois par semaine\nB. Rester inactif plus de 8 heures par jour\nC. Ne pas pratiquer de sport de compétition", r: {r: "Réponse B : Rester inactif plus de 8h par jour", e: "On peut marcher 30 min et rester sédentaire le reste de la journée. C'est le temps assis total qui est nocif, indépendamment du sport."}},
+        {q: "Le stress chronique peut :\nA. Renforcer le système immunitaire à long terme\nB. Améliorer la mémoire et la concentration\nC. Favoriser l'hypertension, les troubles du sommeil et l'anxiété", r: {r: "Réponse C : Hypertension, troubles du sommeil, anxiété", e: "Le cortisol libéré en excès fragilise le système immunitaire, perturbe le sommeil et peut mener à un épuisement (burn-out)."}},
+        {q: "Une alimentation déséquilibrée augmente le risque de :\nA. Maladies chroniques (diabète, obésité, maladies cardiaques)\nB. Troubles de la vue uniquement\nC. Maladies infectieuses comme la grippe", r: {r: "Réponse A : Diabète, obésité, maladies cardiaques", e: "L'alimentation est un déterminant majeur de santé. Les excès prolongés fragilisent le métabolisme et augmentent les risques de maladies chroniques."}},
+        {q: "Le manque de sommeil chronique peut provoquer :\nA. Un renforcement naturel du système immunitaire\nB. Une meilleure gestion du stress\nC. Fatigue, troubles cognitifs et risque accru de maladies", r: {r: "Réponse C : Fatigue, troubles cognitifs, risque accru de maladies", e: "Dormir moins de 6h par nuit augmente le risque d'obésité, de diabète et de maladies cardiovasculaires."}},
+        {q: "La consommation excessive d'alcool augmente le risque de :\nA. Dépendance, maladies du foie et cancers\nB. Meilleures performances physiques\nC. Renforcement des défenses immunitaires", r: {r: "Réponse A : Dépendance, maladies du foie et cancers", e: "L'alcool est classé cancérigène certain. Il est impliqué dans 8 types de cancers dont le foie, le sein et le côlon."}},
+        {q: "Le port de la ceinture de sécurité :\nA. Est inutile en ville car les vitesses sont faibles\nB. Réduit de 40 à 60% le risque de décès en cas d'accident\nC. Est obligatoire uniquement sur autoroute", r: {r: "Réponse B : Réduit de 40 à 60% le risque de décès", e: "Un choc à 50 km/h sans ceinture équivaut à tomber du 3ème étage. La ceinture est obligatoire partout et reste efficace à basse vitesse."}},
+        {q: "La pollution de l'air peut affecter :\nA. Seulement les personnes avec des pathologies préexistantes\nB. Les poumons, le cœur et le système nerveux\nC. Uniquement les voies respiratoires supérieures", r: {r: "Réponse B : Poumons, cœur et système nerveux", e: "Les particules fines (PM2.5) pénètrent dans le sang et atteignent le cerveau et le cœur. La pollution cause 40 000 décès prématurés par an en France."}},
+        {q: "L'exposition excessive aux écrans peut affecter :\nA. Uniquement la vue à long terme\nB. Le sommeil, la vue et la posture\nC. La digestion et le foie", r: {r: "Réponse B : Le sommeil, la vue et la posture", e: "La lumière bleue perturbe la mélatonine (sommeil), les yeux se fatiguent (syndrome des yeux secs), et la posture se détériore avec une utilisation prolongée."}},
+        {q: "Le dépistage médical permet de :\nA. Prévenir ou détecter tôt une maladie avant les symptômes\nB. Guérir automatiquement si effectué régulièrement\nC. Remplacer un suivi médical régulier", r: {r: "Réponse A : Détecter tôt avant les symptômes", e: "Un cancer détecté tôt a souvent un taux de guérison bien supérieur. Le dépistage (mammographie, coloscopie…) permet d'agir à temps."}},
+        {q: "Prendre soin de sa santé, c'est avant tout :\nA. Consulter un médecin dès qu'un symptôme apparaît\nB. Agir en prévention sur ses habitudes de vie au quotidien\nC. Prendre des compléments alimentaires régulièrement", r: {r: "Réponse B : Agir en prévention sur ses habitudes quotidiennes", e: "80% des maladies chroniques seraient évitables par des changements de comportement (alimentation, activité physique, tabac, alcool)."}}
+    ]
+},
         {
-            e: '🚫', n: 'Addictions', c: 'c-orange',
-            questions: [
-                {q: "Qu'est-ce qu'une addiction ?\nA. Une simple habitude contrôlée\nB. Une perte de contrôle sur un comportement ou une substance\nC. Un choix facile à arrêter", r: "Réponse B : Une perte de contrôle sur un comportement ou une substance"},
-                {q: "L'alcool est-il une drogue ?\nA. Non, c'est une boisson légale\nB. Oui, c'est une substance psychoactive qui crée une dépendance\nC. Seulement quand on en consomme en grande quantité", r: "Réponse B : Oui, c'est une substance psychoactive qui crée une dépendance"},
-                {q: "Le tabac peut provoquer :\nA. Des maladies graves (cancer, maladies cardiovasculaires)\nB. Une meilleure respiration et capacité pulmonaire\nC. Un regain d'énergie durable", r: "Réponse A : Des maladies graves (cancer, maladies cardiovasculaires)"},
-                {q: "Une addiction peut-elle toucher tout le monde ?\nA. Non, seulement les personnes fragiles\nB. Oui, tout le monde peut être concerné\nC. Seulement les adultes de plus de 25 ans", r: "Réponse B : Oui, tout le monde peut être concerné"},
-                {q: "Le cannabis peut avoir des effets sur :\nA. La mémoire et la concentration\nB. Seulement la qualité du sommeil\nC. Aucun effet prouvé sur le cerveau", r: "Réponse A : La mémoire et la concentration"},
-                {q: "Les écrans peuvent-ils créer une addiction ?\nA. Non, ils ne sont pas des substances\nB. Oui, comme tout comportement procurant du plaisir\nC. Seulement chez les enfants de moins de 10 ans", r: "Réponse B : Oui, comme tout comportement procurant du plaisir"},
-                {q: "Boire de l'alcool pour oublier ses problèmes est :\nA. Une solution efficace à court terme\nB. Une prise de risque qui aggrave les problèmes\nC. Sans danger si c'est occasionnel", r: "Réponse B : Une prise de risque qui aggrave les problèmes"},
-                {q: "Une personne dépendante peut-elle s'en sortir ?\nA. Non, c'est irréversible\nB. Oui, avec de l'aide et un accompagnement adapté\nC. Rarement, moins d'une fois sur dix", r: "Réponse B : Oui, avec de l'aide et un accompagnement adapté"},
-                {q: "Les addictions peuvent affecter :\nA. Seulement la santé physique\nB. Seulement la vie sociale et familiale\nC. Les deux : santé et vie sociale", r: "Réponse C : Les deux : santé et vie sociale"},
-                {q: "Conduire sous l'emprise d'alcool ou de drogues est :\nA. Autorisé si on se sent bien\nB. Dangereux et interdit par la loi\nC. Acceptable sur de courtes distances", r: "Réponse B : Dangereux et interdit par la loi"},
-                {q: "Demander de l'aide face à une addiction est :\nA. Un signe d'échec personnel\nB. Un signe de faiblesse de caractère\nC. Un acte courageux et une étape clé vers la guérison", r: "Réponse C : Un acte courageux et une étape clé vers la guérison"},
-                {q: "Les jeux d'argent peuvent devenir :\nA. Un loisir toujours sans risque\nB. Une addiction avec des conséquences graves\nC. Une obligation sociale", r: "Réponse B : Une addiction avec des conséquences graves"},
-                {q: "Les médicaments peuvent être dangereux s'ils sont :\nA. Prescrits par un médecin\nB. Mal utilisés, détournés ou mélangés\nC. Pris rarement et ponctuellement", r: "Réponse B : Mal utilisés, détournés ou mélangés"},
-                {q: "L'addiction peut avoir des conséquences sur le travail ou l'école ?\nA. Non, les deux domaines sont indépendants\nB. Oui, elle peut affecter la concentration et l'assiduité\nC. Très rarement, seulement en cas de dépendance sévère", r: "Réponse B : Oui, elle peut affecter la concentration et l'assiduité"},
-                {q: "Le stress chronique peut favoriser :\nA. La détente et le bien-être\nB. Le développement d'addictions\nC. La guérison spontanée", r: "Réponse B : Le développement d'addictions"},
-                {q: "Pour prévenir les addictions, il est important de :\nA. S'isoler pour éviter les mauvaises influences\nB. Parler, s'informer et s'entourer de personnes de confiance\nC. Tester soi-même pour savoir si on est à risque", r: "Réponse B : Parler, s'informer et s'entourer de personnes de confiance"}
-            ]
-        }
+           {
+    e: '🚫', n: 'Addictions', c: 'c-orange',
+    questions: [
+        {q: "Qu'est-ce qu'une addiction ?\nA. Une habitude difficile à changer mais contrôlable\nB. Une perte de contrôle malgré les conséquences négatives connues\nC. Une dépendance uniquement physique à une substance", r: {r: "Réponse B : Perte de contrôle malgré les conséquences négatives", e: "L'addiction se distingue de l'habitude par la compulsion : on continue même en sachant que c'est néfaste. Elle peut être physique ou comportementale."}},
+        {q: "L'alcool est-il une drogue ?\nA. Non, car c'est une boisson légale et culturelle\nB. Non, seulement en cas d'abus répété\nC. Oui, c'est une substance psychoactive qui crée une dépendance", r: {r: "Réponse C : Oui, substance psychoactive créant une dépendance", e: "La légalité n'enlève pas le caractère addictif. L'alcool agit sur le cerveau comme les drogues illicites et crée une dépendance physique et psychologique."}},
+        {q: "Le tabac peut provoquer :\nA. Des maladies uniquement après 20 ans de consommation\nB. Des effets graves même avec une consommation modérée\nC. Des effets néfastes uniquement chez les gros fumeurs", r: {r: "Réponse B : Des effets graves même avec une consommation modérée", e: "Il n'existe pas de seuil sûr pour le tabac. Fumer 1 à 4 cigarettes par jour double déjà le risque de maladies cardiovasculaires."}},
+        {q: "Une addiction peut-elle toucher tout le monde ?\nA. Non, seulement les personnes avec des fragilités génétiques\nB. Non, seulement les personnes ayant des problèmes psychologiques\nC. Oui, tout le monde peut développer une addiction selon les circonstances", r: {r: "Réponse C : Oui, tout le monde peut être concerné", e: "La génétique et les facteurs psychosociaux jouent un rôle mais n'expliquent pas tout. Le contexte et l'entourage sont aussi déterminants."}},
+        {q: "Le cannabis peut avoir des effets sur :\nA. La mémoire, la concentration et la santé mentale\nB. Uniquement le système respiratoire\nC. Seulement en cas d'usage quotidien", r: {r: "Réponse A : Mémoire, concentration et santé mentale", e: "Le THC du cannabis affecte l'hippocampe (mémoire) et le cortex préfrontal (concentration). Un usage précoce augmente le risque de troubles psychiatriques."}},
+        {q: "Les écrans peuvent-ils créer une addiction ?\nA. Non, ce ne sont pas des substances\nB. Oui, ils activent les mêmes circuits de récompense que les drogues\nC. Seulement les jeux vidéo en ligne compétitifs", r: {r: "Réponse B : Oui, ils activent les circuits de récompense", e: "La dopamine libérée par les notifications et likes crée un cycle addiction/manque. L'OMS reconnaît le trouble du jeu vidéo comme maladie depuis 2019."}},
+        {q: "Consommer de l'alcool pour gérer le stress est :\nA. Efficace à court terme et sans risque si ponctuel\nB. Une prise de risque qui amplifie le stress à long terme\nC. Recommandé en petite quantité pour se détendre", r: {r: "Réponse B : Une prise de risque qui amplifie le stress à long terme", e: "L'alcool réduit l'anxiété momentanément mais perturbe le sommeil et augmente le cortisol les jours suivants, créant un cercle vicieux."}},
+        {q: "Une personne dépendante peut-elle s'en sortir ?\nA. Seulement si la dépendance date de moins de 5 ans\nB. Oui, avec un accompagnement adapté et du soutien\nC. Non, la dépendance modifie définitivement le cerveau", r: {r: "Réponse B : Oui, avec accompagnement et soutien", e: "La neuroplasticité permet au cerveau de se réorganiser. La guérison demande du temps et un soutien médical, psychologique et social."}},
+        {q: "Les addictions peuvent affecter :\nA. Uniquement la santé physique\nB. Uniquement les relations sociales et familiales\nC. La santé, le travail, les relations et la situation financière", r: {r: "Réponse C : Santé, travail, relations, situation financière", e: "L'addiction impacte toutes les sphères de vie. C'est pourquoi la prise en charge est pluridisciplinaire : médicale, psychologique et sociale."}},
+        {q: "Conduire sous l'emprise d'alcool ou de drogues :\nA. Est dangereux mais légal si le taux est faible\nB. Est dangereux, illégal et multiplie le risque d'accident mortel\nC. Est acceptable sur de courtes distances en cas d'urgence", r: {r: "Réponse B : Dangereux, illégal, multiplie le risque d'accident", e: "À 0,5g/L d'alcool, le risque d'accident mortel est multiplié par 3. L'alcool reste impliqué dans 30% des accidents mortels en France."}},
+        {q: "Demander de l'aide face à une addiction est :\nA. Inutile si on a suffisamment de volonté\nB. Un aveu de faiblesse difficile à assumer\nC. Un acte courageux et souvent indispensable à la guérison", r: {r: "Réponse C : Un acte courageux et souvent indispensable", e: "La volonté seule ne suffit pas car l'addiction modifie les circuits cérébraux. Un accompagnement professionnel améliore significativement les chances de réussite."}},
+        {q: "Les jeux d'argent peuvent devenir :\nA. Un loisir contrôlable avec de la discipline\nB. Une addiction avec des conséquences financières graves\nC. Un problème uniquement pour les personnes très impulsives", r: {r: "Réponse B : Une addiction avec des conséquences financières graves", e: "Le jeu pathologique touche 600 000 personnes en France. Les plateformes en ligne sont conçues pour maximiser l'engagement."}},
+        {q: "Les médicaments peuvent être dangereux s'ils sont :\nA. Pris avec de l'eau uniquement\nB. Prescrits pour une longue durée\nC. Mal dosés, mélangés ou pris sans prescription", r: {r: "Réponse C : Mal dosés, mélangés ou pris sans prescription", e: "Les interactions médicamenteuses (notamment avec l'alcool) peuvent être fatales. Certains médicaments créent une dépendance physique rapide."}},
+        {q: "Le stress peut favoriser les addictions car :\nA. Il crée un manque physique de substances dans le sang\nB. Il pousse à rechercher des comportements soulageants même nuisibles\nC. Il affaiblit uniquement le système immunitaire", r: {r: "Réponse B : Il pousse à des comportements soulageants même nuisibles", e: "Le stress active les circuits de récompense du cerveau. L'alcool, le tabac ou les écrans apportent un soulagement temporaire qui peut devenir dépendance."}},
+        {q: "Pour prévenir les addictions, il est important de :\nA. Éviter tout contact avec des personnes consommant des substances\nB. Développer des compétences psychosociales et savoir demander de l'aide\nC. Tester les substances pour savoir si on est à risque", r: {r: "Réponse B : Développer des compétences psychosociales", e: "La prévention passe par l'estime de soi, la gestion du stress et le soutien social. L'information et le dialogue en famille sont aussi des facteurs protecteurs."}}
+    ]
+}
     ],
     enfant: [
         {
@@ -732,8 +746,13 @@ function showQuestion() {
     }
 
     const aEl = document.getElementById('a-text');
-    aEl.textContent   = item.r;
-    aEl.style.display = 'none';
+    const rData = item.r;
+if (typeof rData === 'object' && rData.r) {
+    aEl.innerHTML = `<div class="a-answer">✅ ${rData.r}</div>${rData.e ? `<div class="a-explain">💡 ${rData.e}</div>` : ''}`;
+} else {
+    aEl.innerHTML = `<div class="a-answer">✅ ${rData}</div>`;
+}
+aEl.style.display = 'none';
 
     const btn = document.getElementById('btn-action');
     btn.style.display = 'block';
@@ -748,7 +767,7 @@ function handleClick() {
 
     if (aEl.style.display === 'none') {
         // Révéler la réponse
-        aEl.style.display = 'block';
+        aEl.style.display = 'flex';
         document.getElementById('progress-bar').style.width =
             `${((currentIdx + 1) / shuffledQ.length) * 100}%`;
 
